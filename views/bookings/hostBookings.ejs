@@ -1,0 +1,43 @@
+<% layout('layouts/boilerplate') -%>
+<div class="booking-page-wrap">
+    <div class="booking-page-heading">
+        <div>
+            <p class="booking-eyebrow">HOST CONTROL CENTRE</p>
+            <h1>Your reservations</h1>
+            <p class="text-muted mb-0">Review requests for properties you own and manage their status.</p>
+        </div>
+        <a href="/listings/new" class="btn btn-outline-dark rounded-pill px-4"><i class="fa-solid fa-plus me-2"></i>Add a listing</a>
+    </div>
+
+    <% if (bookings.length) { %>
+        <div class="table-responsive booking-table-wrap">
+            <table class="table align-middle booking-table">
+                <thead><tr><th>PROPERTY / GUEST</th><th>DATES</th><th>GUESTS</th><th>TOTAL</th><th>STATUS</th><th></th></tr></thead>
+                <tbody>
+                    <% bookings.forEach(booking => { %>
+                        <tr>
+                            <td>
+                                <div class="host-property-cell">
+                                    <img src="<%= booking.listing ? booking.listing.image.url : '' %>" alt="">
+                                    <div><strong><%= booking.listing ? booking.listing.title : 'Listing unavailable' %></strong><small>Guest: <%= booking.user ? booking.user.username : 'Unknown' %></small></div>
+                                </div>
+                            </td>
+                            <td><span class="d-block"><%= booking.checkIn.toLocaleDateString('en-IN') %></span><small class="text-muted">to <%= booking.checkOut.toLocaleDateString('en-IN') %></small></td>
+                            <td><%= booking.guests %></td>
+                            <td class="fw-bold">&#8377;<%= Number(booking.totalPrice).toLocaleString('en-IN') %></td>
+                            <td><span class="status-pill status-<%= booking.status %>"><%= booking.status %></span></td>
+                            <td><a href="/bookings/<%= booking._id %>" class="btn btn-sm btn-outline-dark rounded-pill">Manage</a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <div class="booking-empty-state">
+            <div class="empty-icon"><i class="fa-solid fa-house-circle-check"></i></div>
+            <h2>No reservation requests yet</h2>
+            <p class="text-muted">When a guest requests one of your properties, it will show up here.</p>
+            <a href="/listings/new" class="btn btn-danger rounded-pill px-4">Create a listing</a>
+        </div>
+    <% } %>
+</div>

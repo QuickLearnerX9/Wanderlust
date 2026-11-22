@@ -1,0 +1,609 @@
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar Custom Styling */
+.navbar {
+    height: auto;
+    min-height: 4.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.brand-text {
+    font-size: 1.35rem;
+    color: #fe424d;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+}
+
+/* Red Circular Compass Icon */
+.logo-icon {
+    color: #fe424d;
+    font-size: 2.1rem;
+    vertical-align: middle;
+}
+
+/* Link Styling */
+.nav-link {
+    color: #222222 !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #fe424d !important;
+}
+
+.explore-link:hover {
+    background-color: #f7f7f7 !important;
+}
+
+/* Airbnb-style Floating Search Capsule */
+.search-capsule {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+    padding: 3px 6px 3px 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    width: 100%;
+    max-width: 420px;
+}
+
+.search-capsule:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+    border-color: #c7c7c7;
+}
+
+.search-capsule:focus-within {
+    box-shadow: 0 0 0 2px rgba(254, 66, 77, 0.25);
+    border-color: #fe424d;
+}
+
+.search-input {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 6px 8px 6px 0 !important;
+    color: #222222 !important;
+    min-width: 220px;
+}
+
+.search-input::placeholder {
+    color: #717171;
+    font-weight: 400;
+}
+
+.btn-search-circle {
+    background-color: #fe424d !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    width: 32px;
+    height: 32px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    flex-shrink: 0;
+}
+
+.btn-search-circle:hover {
+    background-color: #d93b44 !important;
+    transform: scale(1.06);
+}
+
+.btn-search-circle i {
+    font-size: 0.85rem;
+}
+
+.search-capsule .search-input,
+.search-capsule .search-input.form-control {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.search-capsule .search-input:focus,
+.search-capsule .search-input:focus-visible,
+.search-capsule .search-input.form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+
+/* Host Link & Auth Buttons */
+.host-link {
+    font-size: 0.92rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.host-link:hover {
+    background-color: #f7f7f7 !important;
+    color: #fe424d !important;
+}
+
+.btn-auth-outline {
+    border: 1px solid #ddd;
+    color: #222222;
+    font-size: 0.88rem;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.btn-auth-outline:hover {
+    border-color: #fe424d;
+    color: #fe424d;
+    background-color: #ffffff;
+}
+
+.btn-auth-solid {
+    background-color: #fe424d;
+    color: #ffffff !important;
+    border: 1px solid #fe424d;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+}
+
+.btn-auth-solid:hover {
+    background-color: #d93b44;
+    border-color: #d93b44;
+}
+
+.btn-user-menu {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    transition: box-shadow 0.2s ease;
+}
+
+.btn-user-menu:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Hero Section on Homepage */
+.hero-banner {
+    background: linear-gradient(135deg, #18191f 0%, #2b2d42 100%);
+    position: relative;
+    color: #ffffff;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 85% 25%, rgba(254, 66, 77, 0.38) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.category-badge {
+    background-color: rgba(255, 255, 255, 0.94) !important;
+    color: #222222 !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Card image zoom effect */
+.card-img-wrapper {
+    overflow: hidden;
+    border-radius: 1.1rem;
+}
+
+.card-img-top {
+    border-radius: 1.1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 19rem;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.listing-card:hover .card-img-top {
+    transform: scale(1.04);
+}
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 1.5rem;
+    background: transparent !important;
+}
+
+/* Footer Styling */
+footer {
+    border-top: 1px solid #ebebeb;
+    background-color: #f7f7f7;
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.f-info {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #222222;
+}
+
+.f-info-socials {
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-left: 0.8rem;
+    color: #222222;
+    vertical-align: middle;
+}
+
+.f-info-socials a:hover i {
+    color: #fe424d;
+}
+
+.f-info-brand {
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    color: #717171;
+}
+
+.f-info-links a {
+    color: #717171;
+    text-decoration: none;
+    margin: 0 0.2rem;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #222222;
+}
+
+
+/* Custom Styling for Index Grid & Cards */
+    #filters {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .listing-card {
+        border: none !important;
+        margin-bottom: 2rem;
+    }
+
+    .card-img-top {
+        border-radius: 1rem !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        height: 20rem;
+    }
+
+    .card-body {
+        padding: 0 !important;
+        padding-top: 0.5rem !important;
+    }
+
+    .card-text {
+        font-weight: 400;
+    }
+
+    .card-text b {
+        font-weight: 600;
+    }
+
+    .listing-link {
+        text-decoration: none !important;
+    }
+
+    /* Subtle hover zoom/overlay effect */
+    .card-img-overlay {
+        opacity: 0;
+        background-color: white;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .card-img-overlay:hover {
+        opacity: 0.2;
+    }
+
+    /* Custom Red Accent Button */
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.add-btn:hover {
+    background-color: #d93b44 !important;
+}
+
+/* Custom Red Accent Button for Edits */
+.edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.edit-btn:hover {
+    background-color: #d93b44 !important;
+}
+
+/*Dropdown style */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: #ffffff !important;
+        position: absolute;
+        top: 4.5rem; /* Matches your navbar height */
+        left: 0;
+        width: 100%;
+        padding: 1.25rem 2rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid #ebebeb;
+        z-index: 1000;
+    }
+
+    /* Add a little breathing room between nav items on mobile */
+    .navbar-nav .nav-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    
+    .navbar-nav .nav-item:last-child {
+        border-bottom: none;
+    }
+}
+
+
+
+/* homepage style */
+    /* Filters Bar Styling */
+    #filters {
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-bottom: 2rem;
+        padding: 0.5rem 0;
+        gap: 0.5rem;
+    }
+
+    #filters::-webkit-scrollbar {
+        display: none; /* Hides scrollbar on Chrome/Safari for a clean look */
+    }
+
+    .filter {
+        text-align: center;
+        margin-right: 1.5rem;
+        margin-top: 1rem;
+        opacity: 0.7;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none !important;
+        color: #222222;
+        padding-bottom: 0.5rem;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        color: #fe424d !important;
+    }
+
+    .filter.active-filter {
+        opacity: 1;
+        color: #fe424d !important;
+        border-bottom: 3px solid #fe424d;
+    }
+
+    .filter.active-filter div,
+    .filter.active-filter p {
+        color: #fe424d !important;
+        font-weight: 700;
+    }
+
+    .filter div {
+        font-size: 1.25rem;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+        margin-top: 0.35rem;
+        margin-bottom: 0;
+        font-weight: 500;
+    }
+
+    /* Search Bar Styling */
+    .search-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-inp {
+        border-radius: 2rem !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 0.9rem !important;
+        min-width: 280px;
+        border: 1px solid #ced4da !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .search-inp:focus {
+        border-color: #fe424d !important;
+        box-shadow: 0 0 0 0.25rem rgba(254, 66, 77, 0.2) !important;
+    }
+
+    .btn-search {
+        background-color: #fe424d !important;
+        color: #ffffff !important;
+        border-radius: 2rem !important;
+        padding: 0.5rem 1.2rem !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        border: none !important;
+        transition: all 0.2s ease-in-out;
+        margin-left: -2.5rem;
+        z-index: 5;
+    }
+
+    .btn-search:hover {
+        background-color: #d93b44 !important;
+        color: #ffffff !important;
+    }
+
+    @media (max-width: 768px) {
+        .search-inp {
+            min-width: 100%;
+        }
+        .btn-search {
+            margin-left: -3rem;
+        }
+    }
+
+    /* Tax Toggle Switch Box */
+    .tax-toggle {
+        border: 1px solid #ddd;
+        border-radius: 1rem;
+        height: 3.25rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    .tax-toggle:hover {
+        border-color: #fe424d;
+    }
+
+    .tax-info {
+        display: none;
+    }
+
+    /* Mapbox Styling */
+    #map {
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .mapboxgl-popup-content {
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        padding: 12px 14px;
+    }
+
+
+/* Custom style to turn the Bootstrap range thumb red */
+  #reviewRating::-webkit-slider-thumb {
+    background-color: #dc3545;
+  }
+  #reviewRating::-moz-range-thumb {
+    background-color: #dc3545;
+  }
+  #reviewRating::-ms-thumb {
+    background-color: #dc3545;
+  }
+
+  /* Responsive Slider Container */
+  .range-container {
+    touch-action: pan-y;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  /* Base Dot Styling */
+  .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #dee2e6;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: all 0.2s ease;
+  }
+
+  /* Responsive Rating Steps container */
+.rating-steps-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* Pull the ticks slightly inward to match the slider thumb's travel bounds */
+    padding: 0 10px; 
+    box-sizing: border-box;
+  }
+
+  .rating-step {
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    /* Allow each step to take exact equal spacing points */
+    flex: 0 0 auto; 
+  }
+
+  /* Responsive Badges */
+  .rating-step .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    transition: all 0.2s ease;
+  }
+
+  /* Media query for mobile devices to scale padding/fonts nicely */
+  @media (max-width: 576px) {
+    .rating-step .badge {
+      font-size: 0.7rem;
+      padding: 0.3em 0.5em;
+    }
+  }
+
+  /* Active/Selected State Styling */
+  .rating-step.active-step .dot {
+    background-color: #dc3545; /* Red dot on selected */
+    transform: scale(1.4);
+  }
+  
+  .rating-step.active-step .badge {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    border-color: #dc3545 !important;
+  }
+
+  /* Custom subtle focus glow matching the red theme */
+  .form-control:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.15) !important;
+  }
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  .btn-danger:hover {
+    background-color: #b52b3a;
+    border-color: #ab2734;
+  }
+
+.btn-danger, 
+.btn-danger:hover, 
+.btn-danger:focus {
+  color: #fff !important;
+}

@@ -1,0 +1,134 @@
+<% layout('layouts/boilerplate') -%>
+
+<!-- Category Filters Bar -->
+<div id="filters">
+    <a href="/listings" class="filter <%= !selectedCategory ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-globe"></i></div>
+        <p>All</p>
+    </a>
+    <a href="/listings?category=Trending" class="filter <%= selectedCategory === 'Trending' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </a>
+    <a href="/listings?category=Rooms" class="filter <%= selectedCategory === 'Rooms' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+    </a>
+    <a href="/listings?category=Iconic Cities" class="filter <%= selectedCategory === 'Iconic Cities' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic Cities</p>
+    </a>
+    <a href="/listings?category=Mountains" class="filter <%= selectedCategory === 'Mountains' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </a>
+    <a href="/listings?category=Castles" class="filter <%= selectedCategory === 'Castles' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-chess-rook"></i></div>
+        <p>Castles</p>
+    </a>
+    <a href="/listings?category=Amazing Pools" class="filter <%= selectedCategory === 'Amazing Pools' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+    </a>
+    <a href="/listings?category=Camping" class="filter <%= selectedCategory === 'Camping' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </a>
+    <a href="/listings?category=Farms" class="filter <%= selectedCategory === 'Farms' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+    </a>
+    <a href="/listings?category=Arctic" class="filter <%= selectedCategory === 'Arctic' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-snowflake"></i></div>
+        <p>Arctic</p>
+    </a>
+    <a href="/listings?category=Domes" class="filter <%= selectedCategory === 'Domes' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-igloo"></i></div>
+        <p>Domes</p>
+    </a>
+    <a href="/listings?category=Boats" class="filter <%= selectedCategory === 'Boats' ? 'active-filter' : '' %>">
+        <div><i class="fa-solid fa-ship"></i></div>
+        <p>Boats</p>
+    </a>
+
+    <!-- Tax Toggle Switch -->
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+        </div>
+    </div>
+</div>
+
+<% if (searchQuery) { %>
+    <div class="mb-4 d-flex align-items-center justify-content-between p-3 bg-light rounded-4 border">
+        <h5 class="text-muted m-0">
+            Search results for "<span class="text-danger fw-bold"><%= searchQuery %></span>"
+        </h5>
+        <a href="/listings" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+            <i class="fa-solid fa-xmark me-1"></i>Clear Search
+        </a>
+    </div>
+<% } %>
+
+<!-- Responsive Listings Grid -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mb-5">
+    <% if (allListings && allListings.length > 0) { %>
+        <% for (let listing of allListings) { %>
+            <%
+                let avgRating = 0;
+                if (listing.reviews && listing.reviews.length > 0) {
+                    let validRatings = listing.reviews
+                        .filter(r => r && typeof r.rating === 'number')
+                        .map(r => r.rating);
+                    if (validRatings.length > 0) {
+                        let sum = validRatings.reduce((acc, curr) => acc + curr, 0);
+                        avgRating = parseFloat((sum / validRatings.length).toFixed(1));
+                    }
+                } else if (typeof listing.avgRating === 'number') {
+                    avgRating = listing.avgRating;
+                }
+            %>
+            <div class="col">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card listing-card h-100">
+                        <div class="card-img-wrapper position-relative">
+                            <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>">
+                            <!-- Category Badge Overlay -->
+                            <span class="badge position-absolute top-0 start-0 m-3 px-3 py-1 rounded-pill category-badge shadow-sm">
+                                <%= listing.category || 'Featured' %>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-baseline mb-1">
+                                <h6 class="card-title fw-bold text-truncate m-0" style="max-width: 80%;"><%= listing.title %></h6>
+                                <span class="text-muted small">
+                                    <i class="fa-solid fa-star text-warning"></i> <%= avgRating %>
+                                </span>
+                            </div>
+                            <p class="text-muted small mb-1">
+                                <i class="fa-solid fa-location-dot text-danger me-1"></i><%= listing.location %>, <%= listing.country %>
+                            </p>
+                            <p class="card-text text-dark m-0">
+                                <strong>&#8377; <%= Number(listing.price).toLocaleString("en-IN") %></strong>
+                                <span class="text-muted fw-normal">/ night</span>
+                                <i class="tax-info text-danger small">&nbsp; &nbsp;+18% GST</i>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    <% } else { %>
+        <div class="col-12 text-center py-5">
+            <div class="p-5 bg-light rounded-4 border">
+                <i class="fa-solid fa-magnifying-glass-location fa-3x text-danger mb-3"></i>
+                <h4 class="fw-bold">No destinations found</h4>
+                <p class="text-muted mb-3" style="max-width: 450px; margin: 0 auto;">We couldn't find any stays matching your filters. Try selecting another category or clear your search query.</p>
+                <a href="/listings" class="btn btn-danger rounded-pill px-4 py-2 fw-semibold">
+                    <i class="fa-solid fa-compass me-1"></i>Explore All Listings
+                </a>
+            </div>
+        </div>
+    <% } %>
+</div>

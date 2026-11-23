@@ -24,10 +24,23 @@ module.exports.createReview = async (req, res) => {
 };
 
 module.exports.destroyReview = async (req, res) => {
-    let { id, reviewId } = req.params;
+    const { id } = req.params;
 
-    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
+    const review = await Review.findById(id);
+
+    if (!review) {
+        req.flash("error", "Review not found!");
+        return res.redirect("/admin/reviews");
+    }
+
+    // Remove review reference from all associated listings
+    await Listing.updateMany(
+        { reviews: review._id },
+        { $pull: { reviews: review._id } }
+    );
+
+    // Delete review
+    await Review.findByIdAndDelete(id);
 
     req.flash("success", "Review Deleted!");
     res.redirect(`/listings/${id}`);

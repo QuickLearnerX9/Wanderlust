@@ -607,3 +607,555 @@ footer {
 .btn-danger:focus {
   color: #fff !important;
 }
+
+/* =========================================
+   WANDERLUST NAVBAR - RESPONSIVE IMPROVEMENT
+========================================= */
+
+.wanderlust-navbar {
+    z-index: 1050;
+    background: #ffffff;
+}
+
+/* Brand */
+
+.wanderlust-navbar .navbar-brand {
+    flex-shrink: 0;
+}
+
+.wanderlust-navbar .brand-text {
+    font-size: 23px;
+    letter-spacing: -0.8px;
+    color: #ff385c;
+}
+
+.wanderlust-navbar .logo-icon {
+    color: #ff385c;
+    font-size: 25px;
+}
+
+
+/* Search */
+
+.navbar-search {
+    width: min(100%, 410px);
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-capsule {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 46px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+    padding: 3px 6px 3px 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+}
+
+.search-capsule:focus-within {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.10);
+}
+
+.search-input {
+    flex: 1;
+    min-width: 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    background: transparent;
+    padding: 8px 0;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.search-input::placeholder {
+    color: #999999;
+}
+
+.btn-search-circle {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #ff385c;
+    transition: 0.2s ease;
+}
+
+.btn-search-circle:hover {
+    color: #ffffff;
+    background: #e51e4d;
+}
+
+
+/* Explore and Host */
+
+.explore-link,
+.host-link {
+    color: #333333;
+    transition: 0.2s ease;
+}
+
+.explore-link:hover,
+.host-link:hover {
+    background: #fff1f3;
+    color: #ff385c;
+}
+
+
+/* Authentication */
+
+.btn-auth-outline {
+    color: #ff385c;
+    border: 1px solid #ff385c;
+    background: #ffffff;
+}
+
+.btn-auth-outline:hover {
+    color: #ffffff;
+    background: #ff385c;
+}
+
+.btn-auth-solid {
+    color: #ffffff;
+    background: #ff385c;
+    border: 1px solid #ff385c;
+}
+
+.btn-auth-solid:hover {
+    color: #ffffff;
+    background: #e51e4d;
+}
+
+
+/* User Dropdown */
+
+.btn-user-menu {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    transition: 0.2s ease;
+}
+
+.btn-user-menu:hover,
+.btn-user-menu[aria-expanded="true"] {
+    border-color: #aaaaaa;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.user-dropdown .dropdown-menu {
+    min-width: 235px;
+}
+
+.user-dropdown .dropdown-item {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.user-dropdown .dropdown-item:hover {
+    background: #fff1f3;
+    color: #ff385c;
+}
+
+.user-email {
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .navbar-search {
+        width: 280px;
+    }
+
+    .search-input {
+        font-size: 12px;
+    }
+
+    .host-link {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 12px;
+    }
+
+    .brand-text {
+        font-size: 21px !important;
+    }
+
+    .btn-user-menu {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .wanderlust-navbar {
+        padding: 10px 0 !important;
+    }
+
+    .wanderlust-navbar > .container-fluid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* Top row */
+
+    .wanderlust-navbar .navbar-brand {
+        margin-right: 0 !important;
+    }
+
+    .wanderlust-navbar .brand-text {
+        font-size: 22px;
+    }
+
+    .wanderlust-navbar .navbar-toggler {
+        padding: 7px;
+        border-radius: 9px;
+    }
+
+    .wanderlust-navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+
+    /* Expanded Navigation */
+
+    .wanderlust-navbar .navbar-collapse {
+        padding-top: 15px;
+        margin-top: 10px;
+        border-top: 1px solid #eeeeee;
+    }
+
+    .wanderlust-navbar .navbar-nav {
+        width: 100%;
+        align-items: stretch !important;
+    }
+
+
+    /* Explore */
+
+    .wanderlust-navbar .explore-link {
+        justify-content: flex-start;
+        width: fit-content;
+        padding: 10px 14px !important;
+        margin-bottom: 8px;
+    }
+
+
+    /* Search */
+
+    .navbar-search {
+        width: 100%;
+        max-width: none;
+        margin: 5px 0 13px !important;
+    }
+
+    .search-capsule {
+        min-height: 49px;
+        padding: 4px 6px 4px 16px;
+    }
+
+    .search-input {
+        font-size: 14px;
+    }
+
+    .search-input::placeholder {
+        font-size: 12px;
+    }
+
+    .btn-search-circle {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+    }
+
+
+    /* Right Navigation */
+
+    .navbar-right {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px !important;
+        margin: 0 !important;
+    }
+
+
+    /* Add Your Own Hotel */
+
+    .navbar-right .host-link {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 14px !important;
+        border: 1px solid #ffe0e5;
+        background: #fff5f6;
+        font-size: 13px;
+        border-radius: 12px !important;
+    }
+
+    .navbar-right .host-link:hover {
+        background: #ffe9ed;
+    }
+
+
+    /* Guest Buttons */
+
+    .auth-buttons {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px !important;
+    }
+
+    .auth-buttons .btn {
+        width: 100%;
+        padding: 10px !important;
+        font-size: 13px;
+    }
+
+
+    /* Logged-in User Dropdown */
+
+    .user-dropdown {
+        width: 100%;
+    }
+
+    .user-dropdown .btn-user-menu {
+        width: 100%;
+        min-height: 46px;
+        justify-content: center;
+        border-radius: 12px !important;
+        padding: 10px 14px !important;
+    }
+
+    .user-menu-name {
+        font-size: 13px !important;
+    }
+
+    .user-dropdown .dropdown-menu {
+        width: 100%;
+        margin-top: 8px !important;
+        border: 1px solid #eeeeee !important;
+        border-radius: 13px !important;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .wanderlust-navbar > .container-fluid {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .wanderlust-navbar .brand-text {
+        font-size: 20px;
+    }
+
+    .wanderlust-navbar .logo-icon {
+        font-size: 22px;
+    }
+
+    .search-input::placeholder {
+        font-size: 11px;
+    }
+
+}
+
+/* =================================
+   LISTING SHOW PAGE RESPONSIVE
+================================= */
+
+.show-card,
+.booking-card {
+    width: 100%;
+    overflow: hidden;
+}
+
+.show-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.booking-form .form-control,
+.booking-form .form-select {
+    min-height: 46px;
+}
+
+#map {
+    width: 100%;
+    min-height: 300px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .show-img {
+        height: 260px;
+    }
+
+    .show-card,
+    .booking-card {
+        padding: 18px !important;
+        border-radius: 16px !important;
+    }
+
+    .show-card .card-body {
+        padding: 10px 2px 2px;
+    }
+
+    .show-card .card-text {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .show-card .badge {
+        display: inline-block;
+        margin: 5px 3px 0 0 !important;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .booking-secure {
+        font-size: 11px;
+    }
+
+    .booking-card .h4 {
+        font-size: 22px;
+    }
+
+    .booking-date-grid > div {
+        width: 100%;
+    }
+
+    .booking-card .btn {
+        min-height: 48px;
+    }
+
+    .starability-grow {
+        max-width: 100%;
+    }
+
+    #map {
+        min-height: 280px;
+    }
+
+    .admin-actions,
+    .show-actions {
+        flex-wrap: wrap;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+
+    .show-img {
+        height: 220px;
+    }
+
+    .show-card,
+    .booking-card {
+        padding: 14px !important;
+    }
+
+    .booking-secure {
+        font-size: 10px;
+    }
+}
+
+/* =================================
+   CREATE LISTING PAGE RESPONSIVE
+================================= */
+
+.new-listing-form {
+    width: 100%;
+}
+
+.new-listing-form .form-control,
+.new-listing-form .form-select {
+    width: 100%;
+    min-height: 45px;
+}
+
+.new-listing-form textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.new-listing-form input[type="file"] {
+    padding: 10px;
+}
+
+.new-listing-form .btn {
+    min-height: 42px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .new-listing-wrapper {
+        margin-top: 15px !important;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .new-listing-wrapper h3 {
+        font-size: 23px;
+        margin-bottom: 20px !important;
+    }
+
+    .new-listing-form .mb-3 {
+        margin-bottom: 16px !important;
+    }
+
+    .new-listing-form .row > div {
+        width: 100%;
+    }
+
+    .new-listing-form .btn {
+        min-height: 46px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .new-listing-wrapper h3 {
+        font-size: 21px;
+    }
+
+    .new-listing-wrapper {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

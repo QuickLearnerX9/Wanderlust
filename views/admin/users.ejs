@@ -1,0 +1,241 @@
+
+<% layout("layouts/boilerplate") %>
+
+<div class="admin-wrapper">
+
+    <%- include("partials/sidebar", { activePage: "users" }) %>
+
+    <main class="admin-main">
+
+        <%- include("partials/topbar", {
+            pageTitle: "Manage Users",
+            pageSubtitle: "View registered users and manage their access roles."
+        }) %>
+
+
+        <!-- User Summary -->
+        <section class="listing-summary">
+
+            <div class="listing-summary-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+                <p>Total Registered Users</p>
+                <h2><%= users.length %></h2>
+            </div>
+
+            <span class="listing-summary-label">
+                ALL USERS
+            </span>
+
+        </section>
+
+
+        <!-- Users Table -->
+        <section class="admin-panel-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-eyebrow">USER MANAGEMENT</p>
+                    <h2>All Registered Users</h2>
+                    <p>Manage user accounts and administrator permissions.</p>
+                </div>
+
+                <div class="section-heading-icon">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+                        <tr>
+                            <th>USER</th>
+                            <th>EMAIL ADDRESS</th>
+                            <th>ROLE</th>
+                            <th>JOINED DATE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        <% if (users.length === 0) { %>
+
+                            <tr>
+                                <td colspan="5" class="empty-state">
+
+                                    <div class="empty-state-content">
+                                        <i class="fa-solid fa-users-slash"></i>
+                                        <h3>No Users Found</h3>
+                                        <p>There are currently no registered users.</p>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        <% } else { %>
+
+                            <% users.forEach(user => { %>
+
+                                <tr>
+
+                                    <!-- Username -->
+                                    <td data-label="User">
+
+                                        <div class="user-info">
+
+                                            <div class="user-avatar">
+                                                <%= user.username?.charAt(0).toUpperCase() || "U" %>
+                                            </div>
+
+                                            <div class="user-details">
+
+                                                <strong>
+                                                    <%= user.username %>
+                                                </strong>
+
+                                                <% if (String(user._id) === String(currUser._id)) { %>
+                                                    <small>You</small>
+                                                <% } %>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Email -->
+                                    <td data-label="Email">
+
+                                        <div class="user-email">
+
+                                            <i class="fa-regular fa-envelope"></i>
+
+                                            <span>
+                                                <%= user.email || "Not available" %>
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Role -->
+                                    <td data-label="Role">
+
+                                        <% if (user.isAdmin) { %>
+
+                                            <span class="role-badge admin-role">
+                                                <i class="fa-solid fa-shield-halved"></i>
+                                                Administrator
+                                            </span>
+
+                                        <% } else { %>
+
+                                            <span class="role-badge user-role">
+                                                <i class="fa-solid fa-user"></i>
+                                                Regular User
+                                            </span>
+
+                                        <% } %>
+
+                                    </td>
+
+
+                                    <!-- Joined Date -->
+                                    <td data-label="Joined">
+
+                                        <div class="joined-date">
+
+                                            <i class="fa-regular fa-calendar"></i>
+
+                                            <span>
+                                                <%= user.createdAt
+                                                    ? new Date(user.createdAt).toLocaleDateString("en-IN", {
+                                                        day: "2-digit",
+                                                        month: "short",
+                                                        year: "numeric"
+                                                    })
+                                                    : "—" %>
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Actions -->
+                                    <td data-label="Actions">
+
+                                        <% if (String(user._id) === String(currUser._id)) { %>
+
+                                            <span class="current-user-label">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                                Your Account
+                                            </span>
+
+                                        <% } else { %>
+
+                                            <form
+                                                action="/admin/users/<%= user._id %>/toggle-admin"
+                                                method="POST"
+                                                onsubmit="return confirm('Are you sure you want to change this user’s administrator status?');"
+                                            >
+
+                                                <% if (user.isAdmin) { %>
+
+                                                    <button
+                                                        type="submit"
+                                                        class="role-btn remove-admin-btn"
+                                                    >
+                                                        <i class="fa-solid fa-user-minus"></i>
+                                                        Remove Admin
+                                                    </button>
+
+                                                <% } else { %>
+
+                                                    <button
+                                                        type="submit"
+                                                        class="role-btn make-admin-btn"
+                                                    >
+                                                        <i class="fa-solid fa-user-shield"></i>
+                                                        Make Admin
+                                                    </button>
+
+                                                <% } %>
+
+                                            </form>
+
+                                        <% } %>
+
+                                    </td>
+
+                                </tr>
+
+                            <% }) %>
+
+                        <% } %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <%- include("partials/footer") %>
+
+    </main>
+
+</div>

@@ -1,0 +1,48 @@
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+        <i class="fa-solid fa-compass"></i>
+        <h2>Wanderlust</h2>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <p class="sidebar-label">ADMIN MENU</p>
+
+    <nav class="sidebar-nav">
+
+        <a href="/admin"
+           class="<%= activePage === 'dashboard' ? 'active' : '' %>">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/admin/listings"
+           class="<%= activePage === 'listings' ? 'active' : '' %>">
+            <i class="fa-solid fa-house"></i>
+            <span>Manage Listings</span>
+        </a>
+
+        <a href="/admin/reviews"
+           class="<%= activePage === 'reviews' ? 'active' : '' %>">
+            <i class="fa-solid fa-star"></i>
+            <span>Manage Reviews</span>
+        </a>
+
+        <a href="/admin/users"
+           class="<%= activePage === 'users' ? 'active' : '' %>">
+            <i class="fa-solid fa-users"></i>
+            <span>Manage Users</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+        <a href="/listings">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Visit Website</span>
+        </a>
+    </div>
+
+</aside>

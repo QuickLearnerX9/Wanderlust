@@ -21,7 +21,7 @@ module.exports.index = async (req, res) => {
         ];
     }
 
-    const allListings = await Listing.find(filter).populate('reviews').limit(10);;
+    const allListings = await Listing.find(filter).populate('reviews');;
 
     res.render("listings/index.ejs", { allListings, selectedCategory: category, searchQuery: q || "" });
 };
@@ -141,7 +141,26 @@ module.exports.updateListing = async (req, res) => {
 
 module.exports.destroyListing = async (req, res) => {
     let { id } = req.params;
+    const listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing not found!");
+        return res.redirect("/admin/listings");
+    }
+
+    // Delete associated reviews
+    await Review.deleteMany({
+        _id: { $in: listing.reviews }
+    });
+
+    // Delete image from Cloudinary
+    if (listing.image && listing.image.filename) {
+        await cloudinary.uploader.destroy(listing.image.filename);
+    }
+
+    // Delete listing
     let deletedListing = await Listing.findByIdAndDelete(id);
+    
     console.log("Deleted:", deletedListing);
 
     req.flash("success", "Listing Deleted!");

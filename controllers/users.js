@@ -23,7 +23,7 @@ module.exports.register = async (req, res, next) => {
     const { email, username, password } = req.body;
     
     // 1. Create the user instance
-    const user = new User({ email, username });
+    const user = new User({ email, username,isAdmin: false });
 
     // 2. Await the registration
     const registeredUser = await User.register(user, password);

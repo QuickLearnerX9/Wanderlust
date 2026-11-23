@@ -23,6 +23,7 @@ const authRouter = require('./routes/authRouter.js');
 const bookingRouter = require("./routes/bookingRouter.js");
 const dbUrl = process.env.ATLASDB_URL;
 const MongoStore = require("connect-mongo").default;
+const adminRoutes = require("./routes/adminRouter.js");
 
 // const MONGODB_URI = 'mongodb://127.0.0.1:27017/Wanderlust';
 // const {data}=require("./init/data.js")
@@ -55,9 +56,9 @@ app.use(flash());
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
-    crypto: {
-        secret: process.env.SECRET,
-    },
+    // crypto: {
+    //     secret: process.env.SECRET,
+    // },
     touchAfter: 24 * 3600,
 });
 
@@ -131,6 +132,7 @@ mongoose.connect(dbUrl)
   app.use('/listings/:id/reviews', reviewRouter);
   app.use('/auth', authRouter);
   app.use("/bookings", bookingRouter);
+  app.use("/admin", adminRoutes);
   // //initialize database with the sample data
   // const initDB = async () => {
   //   // Clear existing data and insert sample data

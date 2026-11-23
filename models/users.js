@@ -17,6 +17,10 @@ const UserSchema = new Schema({
     lowercase: true,
     trim: true
   },
+  isAdmin: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 // Pass the guaranteed function into the plugin

@@ -1,0 +1,218 @@
+
+<% layout("layouts/boilerplate") %>
+
+<div class="admin-wrapper">
+
+    <%- include("partials/sidebar", { activePage: "listings" }) %>
+
+    <main class="admin-main">
+
+        <%- include("partials/topbar", {
+            pageTitle: "Manage Listings",
+            pageSubtitle: "View, monitor and manage all property listings."
+        }) %>
+
+
+        <!-- Listing Summary -->
+        <section class="listing-summary">
+
+            <div class="listing-summary-icon">
+                <i class="fa-solid fa-house"></i>
+            </div>
+
+            <div>
+                <p>Total Registered Listings</p>
+                <h2><%= listings.length %></h2>
+            </div>
+
+            <span class="listing-summary-label">
+                ALL PROPERTIES
+            </span>
+
+        </section>
+
+
+        <!-- Listings Table -->
+        <section class="admin-panel-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-eyebrow">PROPERTY MANAGEMENT</p>
+                    <h2>All Listings</h2>
+                    <p>Manage the properties available on Wanderlust.</p>
+                </div>
+
+                <div class="section-heading-icon">
+                    <i class="fa-solid fa-building"></i>
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+                        <tr>
+                            <th>PROPERTY</th>
+                            <th>LOCATION</th>
+                            <th>PRICE</th>
+                            <th>OWNER</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        <% if (listings.length === 0) { %>
+
+                            <tr>
+                                <td colspan="5" class="empty-state">
+
+                                    <div class="empty-state-content">
+                                        <i class="fa-solid fa-house-circle-xmark"></i>
+                                        <h3>No Listings Found</h3>
+                                        <p>There are currently no properties listed.</p>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        <% } else { %>
+
+                            <% listings.forEach(listing => { %>
+
+                                <tr>
+
+                                    <!-- Property -->
+                                    <td data-label="Property">
+
+                                        <div class="listing-info">
+
+                                            <img
+                                                src="<%= listing.image?.url || '/images/default-listing.png' %>"
+                                                alt="<%= listing.title %>"
+                                                onerror="this.onerror=null;this.src='/images/default-listing.png';"
+                                            >
+
+                                            <div class="listing-details">
+                                                <strong class="listing-title">
+                                                    <%= listing.title %>
+                                                </strong>
+
+                                                <small>
+                                                    ID: <%= String(listing._id).slice(-8) %>
+                                                </small>
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Location -->
+                                    <td data-label="Location">
+
+                                        <div class="location-info">
+                                            <i class="fa-solid fa-location-dot"></i>
+
+                                            <span>
+                                                <%= listing.location || "Not specified" %>
+                                                <% if (listing.country) { %>
+                                                    , <%= listing.country %>
+                                                <% } %>
+                                            </span>
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Price -->
+                                    <td data-label="Price">
+
+                                        <strong class="listing-price">
+                                            ₹<%= Number(listing.price || 0).toLocaleString("en-IN") %>
+                                        </strong>
+
+                                        <small class="price-label">
+                                            per night
+                                        </small>
+
+                                    </td>
+
+
+                                    <!-- Owner -->
+                                    <td data-label="Owner">
+
+                                        <div class="owner-info">
+
+                                            <div class="owner-avatar">
+                                                <%= listing.owner?.username?.charAt(0).toUpperCase() || "U" %>
+                                            </div>
+
+                                            <span>
+                                                <%= listing.owner?.username || "Unknown" %>
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Actions -->
+                                    <td data-label="Actions">
+
+                                        <div class="admin-actions">
+
+                                            <a
+                                                href="/listings/<%= listing._id %>"
+                                                class="view-btn"
+                                            >
+                                                <i class="fa-regular fa-eye"></i>
+                                                View
+                                            </a>
+
+
+                                            <form
+                                                action="/admin/listings/<%= listing._id %>?_method=DELETE"
+                                                method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this listing? This action cannot be undone.');"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="delete-btn"
+                                                >
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                    Delete
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            <% }) %>
+
+                        <% } %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <%- include("partials/footer") %>
+
+    </main>
+
+</div>

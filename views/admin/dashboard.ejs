@@ -1,0 +1,180 @@
+
+<% layout("layouts/boilerplate") %>
+
+<div class="admin-wrapper">
+
+    <%- include("partials/sidebar", { activePage: "dashboard" }) %>
+
+    <main class="admin-main">
+
+        <%- include("partials/topbar", {
+            pageTitle: "Dashboard",
+            pageSubtitle: "Monitor and manage your Wanderlust platform."
+        }) %>
+
+
+        <!-- Welcome Section -->
+        <section class="admin-welcome">
+
+            <div>
+                <p class="section-eyebrow">OVERVIEW</p>
+                <h2>Welcome to Admin Dashboard</h2>
+                <p>
+                    Here's what's happening across your platform.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="admin-stats">
+
+            <!-- Total Listings -->
+            <div class="stat-card">
+
+                <div class="stat-card-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+
+                    <span class="stat-label">LISTINGS</span>
+                </div>
+
+                <h2><%= totalListings %></h2>
+
+                <p>Total Properties</p>
+
+                <a href="/admin/listings" class="stat-link">
+                    Manage Listings
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Total Users -->
+            <div class="stat-card">
+
+                <div class="stat-card-top">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <span class="stat-label">USERS</span>
+                </div>
+
+                <h2><%= totalUsers %></h2>
+
+                <p>Registered Users</p>
+
+                <a href="/admin/users" class="stat-link">
+                    Manage Users
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Total Reviews -->
+            <div class="stat-card">
+
+                <div class="stat-card-top">
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                    <span class="stat-label">REVIEWS</span>
+                </div>
+
+                <h2><%= totalReviews %></h2>
+
+                <p>Customer Reviews</p>
+
+                <a href="/admin/reviews" class="stat-link">
+                    Manage Reviews
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Quick Actions -->
+        <section class="admin-panel-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-eyebrow">SHORTCUTS</p>
+                    <h2>Quick Actions</h2>
+                    <p>Navigate to important management sections.</p>
+                </div>
+
+                <div class="section-heading-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a href="/admin/listings" class="action-card">
+
+                    <div class="action-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+
+                    <div>
+                        <h3>Manage Listings</h3>
+                        <p>View and manage all properties.</p>
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+
+                <a href="/admin/users" class="action-card">
+
+                    <div class="action-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+                        <h3>Manage Users</h3>
+                        <p>Manage accounts and user roles.</p>
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+
+                <a href="/admin/reviews" class="action-card">
+
+                    <div class="action-icon orange">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                    <div>
+                        <h3>Manage Reviews</h3>
+                        <p>Monitor and manage customer feedback.</p>
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <%- include("partials/footer") %>
+
+    </main>
+
+</div>

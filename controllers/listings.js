@@ -39,7 +39,10 @@ module.exports.showListing = async (req, res) => {
                 path: "author", // Populates the author of each review
             },
         })
-        .populate("owner");
+         .populate({
+        path: "owner",
+        select: "username",
+        });
     
     if (!listing) {
         req.flash("error", "The listing you requested does not exist!");

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Booking = require("../models/booking.js");
+const Booking = require("../models/bookings.js");
 const Listing = require("../models/listings.js");
 
 const ACTIVE_STATUSES = ["pending", "confirmed"];

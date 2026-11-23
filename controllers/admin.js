@@ -2,7 +2,7 @@ const User = require("../models/users.js");
 const Listing = require("../models/listings.js");
 const Review = require("../models/reviews.js");
 const { cloudinary } = require("../config/cloudeStorage.js");
-
+const Booking = require("../models/bookings.js");
 module.exports.dashboard = async (req, res) => {
 
     const totalUsers = await User.countDocuments();
@@ -92,6 +92,8 @@ module.exports.deleteListing = async (req, res) => {
     // Delete listing
     await Listing.findByIdAndDelete(id);
 
+    // Delete all bookings associated with this listing
+    await Booking.deleteMany({ listing: id });
     req.flash("success", "Listing and associated data deleted successfully!");
     res.redirect("/admin/listings");
 };
@@ -118,6 +120,7 @@ module.exports.deleteReview = async (req, res) => {
     req.flash("success", "Review deleted successfully!");
     res.redirect("/admin/reviews");
 };
+
 module.exports.toggleAdmin = async (req, res, next) => {
     try {
         const { id } = req.params;

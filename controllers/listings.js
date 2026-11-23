@@ -43,7 +43,7 @@ module.exports.showListing = async (req, res) => {
         path: "owner",
         select: "username",
         });
-    
+
     if (!listing) {
         req.flash("error", "The listing you requested does not exist!");
         return res.redirect("/listings");

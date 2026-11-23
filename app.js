@@ -50,53 +50,59 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname,"public")))
 
 
-
-//flash implementation
-app.use(flash());
+// Default variables available to every EJS template
+app.locals.currUser = null;
+app.locals.success = [];
+app.locals.error = [];
+app.locals.redirectUrl = null;
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
-    crypto: {
-        secret: process.env.SECRET,
-    },
+    // crypto: {
+    //   secret: process.env.SECRET,
+    // },
     touchAfter: 24 * 3600,
 });
 
 
 //Session Implementation
 const sessionProperties = {
-    store,
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-    },
+  store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
 };
-app.use(session(sessionProperties))
+    app.use(session(sessionProperties))
+    
+    // use static serialize and deserialize of model for passport session support
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+    
+    //Passport Setup
+    app.use(passport.initialize());
+    //Adds th Authentication Through Out the whole session
+    app.use(passport.authenticate('session'));
+    
+    // use static authenticate method of model in LocalStrategy
+    passport.use(new LocalStrategy({ usernameField: 'email' },User.authenticate()));
+    
+    
+    //flash implementation
+    app.use(flash());
+    
+    // Global middleware to make flash messages available in all EJS templates
+    app.use((req, res, next) => {
+      res.locals.currUser = req.user || null;
+      res.locals.success = req.flash("success");
+      res.locals.error = req.flash("error");
+      res.locals.redirectUrl = req.session.redirectUrl || null;
+    
 
-
-//Passport Setup
-app.use(passport.initialize());
-//Adds th Authentication Through Out the whole session
-app.use(passport.authenticate('session'));
-
-// use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy({ usernameField: 'email' },User.authenticate()));
-
-// use static serialize and deserialize of model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
-// Global middleware to make flash messages available in all EJS templates
-app.use((req, res, next) => {
-    res.locals.redirectUrl = req.session.redirectUrl;
-    res.locals.currUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
     next();
 });
 
@@ -162,12 +168,17 @@ mongoose.connect(dbUrl)
   
   //Catch-all for undefined routes (404)
   app.all('/*splat', (req, res, next) => {
+      console.log("404 REQUEST:", req.method, req.originalUrl);
+
     next(new ExpressError(404, 'Page Not Found on this Server'));
   });
   
   // --- CENTRAL ERROR-HANDLING MIDDLEWARE ---
   // Place this at the very bottom of your app.js after all routes
   app.use((err, req, res, next) => {
+      console.error("========== ACTUAL ERROR ==========");
+      console.error(err);
+      console.error("==================================");
       let { statusCode = 500, message = "Something went wrong!" } = err;
       // Render the error.ejs template instead of sending raw text/JSON
     res.status(statusCode).render('errors/errors.ejs', { statusCode, message });
